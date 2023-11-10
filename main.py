@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 
-app = Flask("Website")
+app = Flask(__name__)
 
 
 @app.route("/")
@@ -13,4 +13,11 @@ def about():
     return render_template("about.html")
 
 
-app.run(debug=False)
+@app.route("/data/<station>/<date>")
+def data(station, date):
+    return {"station": str(station),
+            "date": str(date)}
+
+
+if __name__ == "__main__":
+    app.run(debug=False)
