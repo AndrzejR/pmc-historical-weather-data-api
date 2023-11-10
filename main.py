@@ -19,5 +19,12 @@ def data(station, date):
             "date": str(date)}
 
 
+@app.route("/dictionary/<word>")
+def dictionary(word):
+    definition = word.capitalize()
+    return {"word": word,
+            "definition": definition}
+
+
 if __name__ == "__main__":
     app.run(debug=False)
