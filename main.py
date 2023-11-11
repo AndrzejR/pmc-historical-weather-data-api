@@ -3,6 +3,8 @@ import pandas as pd
 
 app = Flask(__name__)
 
+dictionary_df = pd.read_csv('dictionary.csv')
+
 
 @app.route("/")
 def index():
@@ -26,8 +28,7 @@ def data(station, date):
 
 @app.route("/api_v1/dictionary/<word>")
 def dictionary(word):
-    df = pd.read_csv('dictionary.csv')
-    definition = df.loc[df['word'] == word]['definition'].squeeze()
+    definition = dictionary_df.loc[dictionary_df['word'] == word]['definition'].squeeze()
     return {"word": word,
             "definition": definition}
 
