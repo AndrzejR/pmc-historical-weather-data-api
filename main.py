@@ -14,7 +14,7 @@ def about():
     return render_template("about.html")
 
 
-@app.route("/temp/<station>/<date>")
+@app.route("/api_v1/temp/<station>/<date>")
 def data(station, date):
     station_name = str(station).zfill(6)
     df = pd.read_csv(f"data_small/TG_STAID{station_name}.txt", skiprows=20, parse_dates=['    DATE'])
@@ -24,9 +24,10 @@ def data(station, date):
             "temperature": str(temp)}
 
 
-@app.route("/dictionary/<word>")
+@app.route("/api_v1/dictionary/<word>")
 def dictionary(word):
-    definition = word.capitalize()
+    df = pd.read_csv('dictionary.csv')
+    definition = df.loc[df['word'] == word]['definition'].squeeze()
     return {"word": word,
             "definition": definition}
 
