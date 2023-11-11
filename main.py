@@ -13,10 +13,11 @@ def about():
     return render_template("about.html")
 
 
-@app.route("/data/<station>/<date>")
+@app.route("/temp/<station>/<date>")
 def data(station, date):
     return {"station": str(station),
-            "date": str(date)}
+            "date": str(date),
+            "temperature": 42}
 
 
 @app.route("/dictionary/<word>")
