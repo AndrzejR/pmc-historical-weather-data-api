@@ -5,10 +5,12 @@ app = Flask(__name__)
 
 dictionary_df = pd.read_csv('dictionary.csv')
 
+stations_df = pd.read_csv("data_small/stations.txt", skiprows=17)
+
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    return render_template("index.html", data=stations_df[0:92].to_html())
 
 
 @app.route("/about/")
