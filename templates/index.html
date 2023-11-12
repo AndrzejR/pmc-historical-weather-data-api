@@ -13,12 +13,14 @@
 <h2>This is a webpage</h2>
 <p>Hello, I'm a cat</p>
 <img src="{{url_for('static', filename='cat.png')}}" style="width:500px">
-<h3>Below the following URL you can use the temperature data API:</h3>
-<p>URL: http://127.0.0.1:5000/api_v1/temp/station/date</p>
-<p>Example: http://127.0.0.1:5000/api_v1/temp/42/1990-01-01</p>
-<h3>And here, there's a dictionary service:</h3>
+<h3>Here, there's a dictionary service:</h3>
 <p>URL: http://127.0.0.1:5000/api_v1/dictionary/word</p>
 <p>Example: http://127.0.0.1:5000/api_v1/dictionary/aerosol</p>
+<h3>And under the following URL you can use the temperature data API:</h3>
+<p>URL: http://127.0.0.1:5000/api_v1/temp/station/date</p>
+<p>Example by year: http://127.0.0.1:5000/api_v1/temp/42/1990</p>
+<p>Example by date: http://127.0.0.1:5000/api_v1/temp/42/1990/01/01</p>
+
 <h3>Available stations:</h3>
 {{data|safe}}
 </body>

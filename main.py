@@ -18,9 +18,27 @@ def about():
     return render_template("about.html")
 
 
-@app.route("/api_v1/temp/<station>/<date>")
-def data(station, date):
-    station_name = str(station).zfill(6)
+@app.route("/api_v1/temp/<station>")
+def temp_station(station):
+    station_name = station.zfill(6)
+    df = pd.read_csv(f"data_small/TG_STAID{station_name}.txt", skiprows=20, parse_dates=['    DATE'])
+    result = df.to_dict(orient="records")
+    return result
+
+
+@app.route("/api_v1/temp/<station>/<year>")
+def temp_station_year(station, year):
+    station_name = station.zfill(6)
+    df = pd.read_csv(f"data_small/TG_STAID{station_name}.txt", skiprows=20, parse_dates=['    DATE'])
+    df = df.loc[df['    DATE'].dt.year == int(year)]
+    result = df.to_dict(orient="records")
+    return result
+
+
+@app.route("/api_v1/temp/<station>/<year>/<month>/<day>")
+def temp_station_date(station, year, month, day):
+    date = year + month + day
+    station_name = station.zfill(6)
     df = pd.read_csv(f"data_small/TG_STAID{station_name}.txt", skiprows=20, parse_dates=['    DATE'])
     temp = df.loc[df['    DATE'] == date]['   TG'].squeeze() / 10
     return {"station": str(station),
